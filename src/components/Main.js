@@ -5,16 +5,20 @@ import { GlobalContext } from "../context/GlobalState";
 export default function Main({ todos }) {
   const { addAlert, updatetodo } = useContext(GlobalContext);
   async function markDone(id) {
-    axios.put(`https://todo-assgn.herokuapp.com/updatetodo/${id}`).then((res) => {
-      updatetodo(id, "done");
-      addAlert("success", "A todo marked done.");
-    });
+    axios
+      .put(`https://todo-assgn.herokuapp.com/updatetodo/${id}`)
+      .then((res) => {
+        updatetodo(id, "done");
+        addAlert("success", "A todo marked done.");
+      });
   }
   async function deleteTodo(id) {
-    axios.delete(`https://todo-assgn.herokuapp.com/deletetodo/${id}`).then((res) => {
-      updatetodo(id, "delete");
-      addAlert("success", "A todo delete done.");
-    });
+    axios
+      .delete(`https://todo-assgn.herokuapp.com/deletetodo/${id}`)
+      .then((res) => {
+        updatetodo(id, "delete");
+        addAlert("success", "A todo delete done.");
+      });
   }
   return (
     <div className="Main">
@@ -24,7 +28,11 @@ export default function Main({ todos }) {
             <Card key={item._id}>
               <Card.Content>
                 <Card.Header>{item.todo} </Card.Header>
-                <Card.Meta>{item.createdAt}</Card.Meta>
+                <Card.Meta>
+                  {item.createdAt.substring(11, 16) +
+                    "," +
+                    item.createdAt.substring(0, 10)}
+                </Card.Meta>
 
                 <Card.Description>{item.body}</Card.Description>
               </Card.Content>

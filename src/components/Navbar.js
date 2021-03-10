@@ -132,7 +132,13 @@ export default function Navbar({ todos }) {
                 <div key={item._id}>
                   <Feed.Event>
                     <Feed.Content>
-                      <Feed.Date content={`${item.createdAt.substr(0, 10)}`} />
+                      <Feed.Date
+                        content={`${
+                          item.createdAt.substring(11, 16) +
+                          "," +
+                          item.createdAt.substring(0, 10)
+                        }`}
+                      />
                       <Feed.Summary>{item.update}</Feed.Summary>
                     </Feed.Content>
                   </Feed.Event>
