@@ -43,7 +43,7 @@ export default function Navbar({ todos }) {
         current_todo.trim().length !== 0
       ) {
         await axios
-          .post("http://localhost:3000/addtodo", {
+          .post("https://todo-assgn.herokuapp.com/addtodo", {
             todo: current_todo,
             body: current_desc,
           })

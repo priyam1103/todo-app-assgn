@@ -5,13 +5,13 @@ import { GlobalContext } from "../context/GlobalState";
 export default function Main({ todos }) {
   const { addAlert, updatetodo } = useContext(GlobalContext);
   async function markDone(id) {
-    axios.put(`http://localhost:3000/updatetodo/${id}`).then((res) => {
+    axios.put(`https://todo-assgn.herokuapp.com/updatetodo/${id}`).then((res) => {
       updatetodo(id, "done");
       addAlert("success", "A todo marked done.");
     });
   }
   async function deleteTodo(id) {
-    axios.delete(`http://localhost:3000/deletetodo/${id}`).then((res) => {
+    axios.delete(`https://todo-assgn.herokuapp.com/deletetodo/${id}`).then((res) => {
       updatetodo(id, "delete");
       addAlert("success", "A todo delete done.");
     });

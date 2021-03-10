@@ -26,13 +26,13 @@ export const GlobalProvider = ({ children }) => {
   }
   async function api_gettodos() {
     loader();
-    await axios.get("http://localhost:3000/todos").then((res) => {
+    await axios.get("https://todo-assgn.herokuapp.com/todos").then((res) => {
       dispatch({
         type: "UPDATE_TODO",
         payload: res.data,
       });
     });
-    await axios.get("http://localhost:3000/getupdates").then((res) => {
+    await axios.get("https://todo-assgn.herokuapp.com/getupdates").then((res) => {
       console.log(res);
       dispatch({
         type: "UPDATE_NOTI",
