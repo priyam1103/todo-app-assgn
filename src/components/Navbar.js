@@ -43,10 +43,20 @@ export default function Navbar({ todos }) {
         current_todo.trim().length !== 0
       ) {
         await axios
-          .post("https://todo-assgn.herokuapp.com/addtodo", {
-            todo: current_todo,
-            body: current_desc,
-          })
+          .post(
+            "http://localhost:3005/addtodo",
+            {
+              todo: current_todo,
+              body: current_desc,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem(
+                  "todo-app-token"
+                )}`,
+              },
+            }
+          )
           .then((res) => {
             setModalState(!modalState);
             update_todo_list(res.data.todo_created);
@@ -68,6 +78,12 @@ export default function Navbar({ todos }) {
       loader();
     }
   }
+
+  async function logout() {
+    localStorage.removeItem("todo-app-token");
+    localStorage.removeItem("todo-app-email");
+    window.location.href = "http://localhost:3000";
+  }
   return (
     <div className="navbar">
       <Input
@@ -82,12 +98,7 @@ export default function Navbar({ todos }) {
         }}
       />
       <div>
-        <Icon
-          name="bell"
-          size="large"
-          onClick={() => setModalNoti(!modalNoti)}
-          style={{ cursor: "pointer" }}
-        />
+        <Label as="a">{localStorage.getItem("todo-app-email")}</Label>
         <Button as="div" labelPosition="right">
           <Button color="green" onClick={() => setModalState(!modalState)}>
             <Icon name="plus" />
@@ -96,6 +107,11 @@ export default function Navbar({ todos }) {
           <Label as="a" basic color="green" pointing="left">
             {todos.length}
           </Label>
+        </Button>
+        <Button as="div" labelPosition="right">
+          <Button color="red" onClick={logout}>
+            Logout
+          </Button>
         </Button>
       </div>
       <Modal open={modalState}>

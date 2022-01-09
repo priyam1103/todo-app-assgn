@@ -26,20 +26,19 @@ export const GlobalProvider = ({ children }) => {
   }
   async function api_gettodos() {
     loader();
-    await axios.get("https://todo-assgn.herokuapp.com/todos").then((res) => {
-      dispatch({
-        type: "UPDATE_TODO",
-        payload: res.data,
+    await axios
+      .get("http://localhost:3005/todos", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("todo-app-token")}`,
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: "UPDATE_TODO",
+          payload: res.data,
+        });
+        loader();
       });
-    });
-    await axios.get("https://todo-assgn.herokuapp.com/getupdates").then((res) => {
-      console.log(res);
-      dispatch({
-        type: "UPDATE_NOTI",
-        payload: res.data,
-      });
-      loader();
-    });
   }
   function update_current_todo(current_todo) {
     dispatch({

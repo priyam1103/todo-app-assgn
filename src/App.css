@@ -66,6 +66,15 @@
   font-size: 1rem;
 }
 
+.body {
+  
+  color: white;
+  padding: 40px;
+  font-family: Arial;
+  text-align: left;
+  width: 50%;
+  margin:auto;
+}
 @media only screen and (max-width: 700px) {
   .Main {
     margin: 20px;
